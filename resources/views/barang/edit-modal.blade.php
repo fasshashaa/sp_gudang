@@ -5,12 +5,12 @@
                 @csrf
                 @method('PUT')
                 <div class="modal-header border-0 pb-0">
-                    <h5 class="modal-title page-title fw-bold" id="editBarangModalLabel">
-                        <div class="title-icon">
-                            <i class="fas fa-edit"></i>
-                        </div>
-                        Edit Barang
-                    </h5>
+                    <h6 class="modal-title page-title fw-bold m-0 fs-5" id="createBarangModalLabel">
+                    <div class="title-icon">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    Edit Barang Baru
+                </h6>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
