@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Laravel') }} - Login</title>
+    <title>Gudang Sparepart - Login</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -19,17 +19,15 @@
     }
     
     body {
-          font-family: 'Poppins', sans-serif;
-            background-color: #eef4ff;
-            /* Warna background fallback */
-            background-image: url('{{ asset('images/gal.png') }}');
-            /* Gambar latar belakang baru */
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+        font-family: 'Poppins', sans-serif;
+        background-color: #eef4ff;
+        background-image: url('{{ asset('images/gal.png') }}');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
     }
     
-    /* Animated background elements */
+    /* Enhanced animated background with soft blue */
     body::before {
         content: '';
         position: absolute;
@@ -38,16 +36,50 @@
         right: 0;
         bottom: 0;
         background: 
-            radial-gradient(circle at 20% 50%, rgba(33, 150, 243, 0.1) 0%, transparent 50%),
-            radial-gradient(circle at 80% 20%, rgba(25, 118, 210, 0.1) 0%, transparent 50%),
-            radial-gradient(circle at 40% 80%, rgba(66, 165, 245, 0.1) 0%, transparent 50%);
-        animation: backgroundShift 20s ease-in-out infinite;
+            radial-gradient(circle at 20% 20%, rgba(135, 206, 235, 0.12) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(173, 216, 230, 0.15) 0%, transparent 50%),
+            radial-gradient(circle at 40% 40%, rgba(176, 224, 230, 0.08) 0%, transparent 50%);
+        animation: backgroundPulse 8s ease-in-out infinite;
         pointer-events: none;
     }
     
-    @keyframes backgroundShift {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.7; }
+    @keyframes backgroundPulse {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.8; transform: scale(1.05); }
+    }
+    
+    /* Floating particles with soft blue */
+    .particles {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 1;
+    }
+    
+    .particle {
+        position: absolute;
+        background: rgba(135, 206, 235, 0.25);
+        border-radius: 50%;
+        animation: float 15s infinite linear;
+    }
+    
+    .particle:nth-child(1) { width: 4px; height: 4px; left: 10%; animation-delay: 0s; }
+    .particle:nth-child(2) { width: 6px; height: 6px; left: 20%; animation-delay: 2s; }
+    .particle:nth-child(3) { width: 3px; height: 3px; left: 30%; animation-delay: 4s; }
+    .particle:nth-child(4) { width: 5px; height: 5px; left: 40%; animation-delay: 6s; }
+    .particle:nth-child(5) { width: 4px; height: 4px; left: 50%; animation-delay: 8s; }
+    .particle:nth-child(6) { width: 7px; height: 7px; left: 60%; animation-delay: 10s; }
+    .particle:nth-child(7) { width: 3px; height: 3px; left: 70%; animation-delay: 12s; }
+    .particle:nth-child(8) { width: 5px; height: 5px; left: 80%; animation-delay: 14s; }
+    .particle:nth-child(9) { width: 4px; height: 4px; left: 90%; animation-delay: 16s; }
+    .particle:nth-child(10) { width: 6px; height: 6px; left: 95%; animation-delay: 18s; }
+    
+    @keyframes float {
+        0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
     }
     
     .login-container {
@@ -55,36 +87,41 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 1.5rem;
+        padding: 2rem;
         position: relative;
-        z-index: 1;
+        z-index: 2;
     }
     
     .login-wrapper {
         width: 100%;
-        max-width: 420px;
+        max-width: 800px; /* Adjusted to make the card smaller */
         position: relative;
     }
     
+    /* Main floating card */
     .login-card {
         background: rgba(255, 255, 255, 0.98);
-        backdrop-filter: blur(20px);
-        border: 1px solid rgba(33, 150, 243, 0.15);
-        border-radius: 20px;
-        padding: 0;
-        box-shadow: 
-            0 25px 50px rgba(33, 150, 243, 0.15),
-            0 15px 35px rgba(33, 150, 243, 0.1),
-            inset 0 1px 0 rgba(255, 255, 255, 0.9);
-        position: relative;
+        backdrop-filter: blur(30px);
+        border: 1px solid rgba(135, 206, 235, 0.1);
+        border-radius: 24px;
         overflow: hidden;
-        animation: slideInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 
+            0 20px 60px rgba(135, 206, 235, 0.08), /* Adjusted for less heavy look */
+            0 10px 20px rgba(135, 206, 235, 0.04),
+            inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        animation: cardFloat 6s ease-in-out infinite, slideInUp 1s ease-out;
+        position: relative;
+    }
+    
+    @keyframes cardFloat {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-10px) rotate(0.5deg); }
     }
     
     @keyframes slideInUp {
         0% {
             opacity: 0;
-            transform: translateY(40px) scale(0.96);
+            transform: translateY(60px) scale(0.9);
         }
         100% {
             opacity: 1;
@@ -92,158 +129,184 @@
         }
     }
     
-    /* Decorative top border */
+    /* Glowing border effect with adjusted colors */
     .login-card::before {
         content: '';
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
-        height: 4px;
-        background: linear-gradient(90deg, #2196f3, #1976d2, #0d47a1);
-        border-radius: 20px 20px 0 0;
+        bottom: 0;
+        background: linear-gradient(45deg, #000000, #ffee00, #ff0000);
+        border-radius: 24px;
+        padding: 2px;
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: exclude;
+        animation: borderGlow 3s ease-in-out infinite;
+        z-index: -1;
     }
     
-    .card-header {
-        background: transparent;
-        border: none;
-        text-align: center;
-        padding: 2.5rem 2rem 1rem;
-        position: relative;
+    @keyframes borderGlow {
+        0%, 100% { opacity: 0.3; }
+        50% { opacity: 0.6; }
     }
     
-    .logo {
-        width: 70px;
-        height: 70px;
-        background: linear-gradient(135deg, #2196f3 0%, #1976d2 50%, #0d47a1 100%);
-        border-radius: 50%;
+    .card-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        min-height: 550px; /* Adjusted to make the card less tall */
+    }
+    
+    /* Left side - Welcome section with transparency */
+    .welcome-section {
+        background: linear-gradient(135deg, #87ceeb 0%, #4682b4 100%);
+        backdrop-filter: blur(20px);
+        padding: 2.5rem; /* Adjusted for tighter spacing */
         display: flex;
-        align-items: center;
+        flex-direction: column;
         justify-content: center;
-        margin: 0 auto 1.5rem;
+        align-items: center;
+        text-align: center;
         color: white;
-        font-size: 28px;
-        box-shadow: 
-            0 15px 35px rgba(33, 150, 243, 0.3),
-            0 5px 15px rgba(33, 150, 243, 0.2);
         position: relative;
         overflow: hidden;
-        animation: logoGlow 3s ease-in-out infinite;
     }
     
-    .logo::before {
+    .welcome-section::before {
         content: '';
         position: absolute;
         top: -50%;
-        left: -50%;
+        right: -50%;
         width: 200%;
         height: 200%;
-        background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-        animation: logoShine 4s infinite;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+        animation: welcomeShine 4s ease-in-out infinite;
     }
     
-    @keyframes logoGlow {
-        0%, 100% { box-shadow: 0 15px 35px rgba(33, 150, 243, 0.3), 0 5px 15px rgba(33, 150, 243, 0.2); }
-        50% { box-shadow: 0 20px 40px rgba(33, 150, 243, 0.4), 0 8px 20px rgba(33, 150, 243, 0.3); }
+    @keyframes welcomeShine {
+        0%, 100% { transform: rotate(0deg); opacity: 0.5; }
+        50% { transform: rotate(180deg); opacity: 0.8; }
     }
     
-    @keyframes logoShine {
-        0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-        50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-    }
-    
-    .welcome-title {
-        font-size: 32px;
-        font-weight: 800;
-        background: linear-gradient(135deg, #1976d2, #0d47a1);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        margin-bottom: 0.5rem;
-        letter-spacing: -0.02em;
-    }
-    
-    .welcome-subtitle {
-        color: #64b5f6;
-        font-size: 16px;
-        font-weight: 500;
+    .logo-container {
+        position: relative;
+        z-index: 2;
         margin-bottom: 2rem;
     }
     
-    .card-body {
-        padding: 0 2rem 2.5rem;
+    /* Adjusted size for the Nunggal logo image */
+    .logo-container img {
+        width: 80px; /* Adjusted to be smaller */
+        height: 80px;
+        border-radius: 50%;
+        margin-bottom: 1rem;
     }
     
-    .form-floating {
+    .welcome-title {
+        font-size: 32px; /* Adjusted to be smaller */
+        font-weight: 800;
+        margin-bottom: 1rem;
+        letter-spacing: -0.02em;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: relative;
+        z-index: 2;
+    }
+    
+    .welcome-subtitle {
+        font-size: 16px;
+        font-weight: 400;
+        opacity: 0.9;
+        line-height: 1.6;
+        position: relative;
+        z-index: 2;
+    }
+    
+    /* Right side - Form section */
+    .form-section {
+        padding: 2.5rem; /* Adjusted for tighter spacing */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: #ffffff;
+    }
+    
+    .form-header {
+        text-align: center;
+        margin-bottom: 2.5rem;
+    }
+    
+    .form-title {
+        font-size: 28px; /* Adjusted to be smaller */
+        font-weight: 700;
+        color: #4682b4;
+        margin-bottom: 0.5rem;
+    }
+    
+    .form-subtitle {
+        color: #64748b;
+        font-size: 16px;
+        font-weight: 500;
+    }
+    
+    .form-group {
         position: relative;
         margin-bottom: 1.5rem;
     }
     
     .form-control {
-        height: 58px;
-        border: 2px solid #e3f2fd;
-        border-radius: 14px;
-        background: #fafffe;
+        width: 100%;
+        height: 56px;
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        background: #ffffff;
         font-size: 16px;
         font-weight: 500;
-        padding: 1rem 3.5rem 1rem 1.25rem;
+        padding: 0 3rem 0 1rem;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        color: #1565c0;
-        box-shadow: inset 0 1px 3px rgba(33, 150, 243, 0.05);
+        color: #1e293b;
     }
     
     .form-control::placeholder {
-        color: #90caf9;
+        color: #94a3b8;
         opacity: 0.8;
     }
     
     .form-control:focus {
         outline: none;
-        border-color: #2196f3;
+        border-color: #87ceeb;
         background: #ffffff;
         box-shadow: 
-            0 0 0 3px rgba(33, 150, 243, 0.1),
-            inset 0 1px 3px rgba(33, 150, 243, 0.05);
-        transform: translateY(-1px);
+            0 0 0 3px rgba(135, 206, 235, 0.1),
+            0 4px 12px rgba(135, 206, 235, 0.15);
+        transform: translateY(-2px);
     }
     
     .form-control.is-invalid {
-        border-color: #f44336;
+        border-color: #ef4444;
         box-shadow: 
-            0 0 0 3px rgba(244, 67, 54, 0.1),
-            inset 0 1px 3px rgba(244, 67, 54, 0.05);
-    }
-    
-    .form-floating label {
-        color: #64b5f6;
-        font-weight: 600;
-        font-size: 14px;
-        padding: 0 0.25rem;
-        background: transparent;
-        transition: all 0.3s ease;
-    }
-    
-    .form-control:focus ~ label,
-    .form-control:not(:placeholder-shown) ~ label {
-        color: #1976d2;
-        transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+            0 0 0 3px rgba(239, 68, 68, 0.1),
+            0 4px 12px rgba(239, 68, 68, 0.15);
     }
     
     .input-icon {
         position: absolute;
-        right: 1.25rem;
+        right: 1rem;
         top: 50%;
         transform: translateY(-50%);
-        color: #90caf9;
+        color: #94a3b8;
         font-size: 18px;
         transition: all 0.3s ease;
-        z-index: 5;
+        cursor: pointer;
     }
     
-    .form-control:focus ~ .input-icon {
-        color: #2196f3;
+    .form-control:focus + .input-icon {
+        color: #87ceeb;
         transform: translateY(-50%) scale(1.1);
+    }
+    
+    .input-icon:hover {
+        color: #4682b4;
+        transform: translateY(-50%) scale(1.2);
     }
     
     .remember-section {
@@ -251,86 +314,42 @@
         align-items: center;
         justify-content: space-between;
         margin-bottom: 2rem;
+        flex-wrap: wrap;
+        gap: 1rem;
     }
     
     .form-check {
         display: flex;
         align-items: center;
-        gap: 0.75rem;
+        gap: 0.5rem;
     }
     
     .form-check-input {
-        width: 20px;
-        height: 20px;
-        border: 2px solid #bbdefb;
-        border-radius: 6px;
+        width: 18px;
+        height: 18px;
+        border: 2px solid #cbd5e0;
+        border-radius: 4px;
         background: white;
         transition: all 0.3s ease;
         cursor: pointer;
     }
     
     .form-check-input:checked {
-        background: #2196f3;
-        border-color: #2196f3;
-        box-shadow: 0 2px 10px rgba(33, 150, 243, 0.3);
+        background: #87ceeb;
+        border-color: #87ceeb;
+        box-shadow: 0 2px 8px rgba(135, 206, 235, 0.3);
     }
     
     .form-check-label {
-        color: #1976d2;
+        color: #475569;
         font-weight: 500;
         font-size: 14px;
         cursor: pointer;
         user-select: none;
     }
     
-    .btn-primary {
-        width: 100%;
-        height: 58px;
-        background: linear-gradient(135deg, #2196f3 0%, #1976d2 50%, #0d47a1 100%);
-        border: none;
-        border-radius: 14px;
-        font-weight: 700;
-        font-size: 16px;
-        letter-spacing: 0.5px;
-        color: white;
-        text-transform: uppercase;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 
-            0 8px 25px rgba(33, 150, 243, 0.3),
-            inset 0 1px 0 rgba(255, 255, 255, 0.2);
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .btn-primary::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-        transition: left 0.6s ease;
-    }
-    
-    .btn-primary:hover::before {
-        left: 100%;
-    }
-    
-    .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 
-            0 15px 40px rgba(33, 150, 243, 0.4),
-            inset 0 1px 0 rgba(255, 255, 255, 0.2);
-        background: linear-gradient(135deg, #1976d2 0%, #1565c0 50%, #0d47a1 100%);
-    }
-    
-    .btn-primary:active {
-        transform: translateY(0);
-    }
-    
     .forgot-link {
-        color: #2196f3;
+        color: #87ceeb;
         text-decoration: none;
         font-weight: 600;
         font-size: 14px;
@@ -345,20 +364,93 @@
         left: 0;
         width: 0;
         height: 2px;
-        background: #2196f3;
+        background: #87ceeb;
         transition: width 0.3s ease;
     }
     
     .forgot-link:hover {
-        color: #1976d2;
+        color: #4682b4;
+        transform: translateY(-1px);
     }
     
     .forgot-link:hover::after {
         width: 100%;
     }
     
+    .btn-primary {
+        width: 100%;
+        height: 56px;
+        background: linear-gradient(135deg, #87ceeb 0%, #4682b4 100%);
+        border: none;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 16px;
+        letter-spacing: 0.5px;
+        color: white;
+        text-transform: uppercase;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 
+            0 8px 25px rgba(135, 206, 235, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+    }
+    
+    .btn-primary::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        transition: left 0.6s ease;
+    }
+    
+    .btn-primary:hover::before {
+        left: 100%;
+    }
+    
+    .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 
+            0 15px 35px rgba(135, 206, 235, 0.4),
+            inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        background: linear-gradient(135deg, #5f9ea0 0%, #2f4f4f 100%);
+    }
+    
+    .btn-primary:active {
+        transform: translateY(-1px);
+    }
+    
+    .register-section {
+        text-align: center;
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid #e2e8f0;
+    }
+    
+    .register-text {
+        color: #64748b;
+        font-size: 15px;
+        font-weight: 500;
+    }
+    
+    .register-link {
+        color: #87ceeb;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .register-link:hover {
+        color: #4682b4;
+        text-decoration: underline;
+    }
+    
     .invalid-feedback {
-        color: #f44336;
+        color: #ef4444;
         font-size: 14px;
         font-weight: 600;
         margin-top: 0.5rem;
@@ -370,244 +462,198 @@
     .invalid-feedback::before {
         content: '⚠';
         font-size: 14px;
-        color: #ff9800;
+        color: #f59e0b;
     }
     
-    /* Floating decorative elements */
-    .floating-elements {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        pointer-events: none;
-        z-index: 0;
-    }
-    
-    .floating-circle {
-        position: absolute;
-        border-radius: 50%;
-        background: rgba(33, 150, 243, 0.1);
-        animation: float 15s infinite ease-in-out;
-    }
-    
-    .floating-circle:nth-child(1) {
-        width: 100px;
-        height: 100px;
-        top: 10%;
-        left: 15%;
-        animation-delay: 0s;
-        background: rgba(33, 150, 243, 0.08);
-    }
-    
-    .floating-circle:nth-child(2) {
-        width: 150px;
-        height: 150px;
-        top: 60%;
-        right: 10%;
-        animation-delay: -5s;
-        background: rgba(25, 118, 210, 0.06);
-    }
-    
-    .floating-circle:nth-child(3) {
-        width: 80px;
-        height: 80px;
-        bottom: 15%;
-        left: 25%;
-        animation-delay: -10s;
-        background: rgba(66, 165, 245, 0.1);
-    }
-    
-    .floating-circle:nth-child(4) {
-        width: 120px;
-        height: 120px;
-        top: 30%;
-        right: 30%;
-        animation-delay: -7s;
-        background: rgba(144, 202, 249, 0.08);
-    }
-    
-    @keyframes float {
-        0%, 100% {
-            transform: translateY(0) translateX(0) rotate(0deg);
-            opacity: 0.7;
-        }
-        25% {
-            transform: translateY(-20px) translateX(10px) rotate(90deg);
-            opacity: 0.4;
-        }
-        50% {
-            transform: translateY(10px) translateX(-15px) rotate(180deg);
-            opacity: 0.6;
-        }
-        75% {
-            transform: translateY(-10px) translateX(5px) rotate(270deg);
-            opacity: 0.3;
-        }
-    }
-    
+    /* Mobile responsiveness */
     @media (max-width: 768px) {
         .login-container {
             padding: 1rem;
         }
         
-        .card-body,
-        .card-header {
-            padding-left: 1.5rem;
-            padding-right: 1.5rem;
+        .card-content {
+            grid-template-columns: 1fr;
+            min-height: auto;
+        }
+        
+        .welcome-section {
+            padding: 2rem;
+            min-height: 300px;
+        }
+        
+        .form-section {
+            padding: 2rem;
         }
         
         .welcome-title {
             font-size: 28px;
         }
         
-        .logo {
-            width: 60px;
-            height: 60px;
+        .form-title {
             font-size: 24px;
         }
         
-        .form-control {
-            height: 54px;
+        .logo-container img {
+            width: 80px;
+            height: 80px;
         }
         
-        .btn-primary {
-            height: 54px;
-            font-size: 15px;
+        .remember-section {
+            flex-direction: column;
+            align-items: flex-start;
         }
-        .register-text {
-    color: #64748b;
-    font-size: 15px;
-    font-weight: 500;
-}
-
-/* Gaya baru untuk penempatan link register */
-.register-link-container {
-    text-align: center;
-    margin-top: 2rem; /* Memberikan jarak dari tombol login */
-    padding-top: 1.5rem; /* Ruang di atas garis horizontal */
-    position: relative;
-}
-
-.register-link-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    background: #e2e8f0; /* Warna garis pemisah */
-    border-radius: 2px;
-}
-
-/* Gaya teks dan link yang sudah Anda miliki, pastikan sudah ada */
-.register-text {
-    color: #64748b;
-    font-size: 15px;
-    font-weight: 500;
-}
-
-.register-link {
-    color: #3b82f6;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.register-link:hover {
-    color: #1d4ed8;
-    text-decoration: underline;
-}
     }
 </style>
 
-<div class="floating-elements">
-    <div class="floating-circle"></div>
-    <div class="floating-circle"></div>
-    <div class="floating-circle"></div>
-    <div class="floating-circle"></div>
+<div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
 </div>
 
 <div class="login-container">
     <div class="login-wrapper">
         <div class="card login-card">
-            <div class="card-header">
-                <div class="logo">
-                    <i class="fas fa-user-shield"></i>
+            <div class="card-content">
+                <div class="welcome-section">
+                    <div class="logo-container">
+                        <img src="{{ asset('images/nunggal.png') }}" alt="Gudang Sparepart Logo">
+                        <h1 class="welcome-title">Gudang Sparepart</h1>
+                        <p class="welcome-subtitle">
+                            PT. MANUNGGAL PERKASA
+                        </p>
+                    </div>
                 </div>
-                <h1 class="welcome-title">Welcome Back</h1>
-                <p class="welcome-subtitle">Sign in to access your account</p>
-            </div>
-            
-            <div class="card-body">
-                <form method="POST" action="{{ route('login') }}">
-                    @csrf
-                    
-                    <div class="form-floating">
-                        <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" 
-                               name="username" value="{{ old('username') }}" required autocomplete="username" 
-                               autofocus placeholder="Enter your username">
-                        <label for="username">{{ __('Username') }}</label>
-                        <i class="fas fa-user input-icon"></i>
-                        
-                        @error('username')
-                            <div class="invalid-feedback">
-                                <strong>{{ $message }}</strong>
-                            </div>
-                        @enderror
+                
+                <div class="form-section">
+                    <div class="form-header">
+                        <h2 class="form-title">Welcome Back</h2>
+                        <p class="form-subtitle">Sign in to your account</p>
                     </div>
                     
-                    <div class="form-floating">
-                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" 
-                               name="password" required autocomplete="current-password" placeholder="Enter your password">
-                        <label for="password">{{ __('Password') }}</label>
-                        <i class="fas fa-lock input-icon"></i>
-                        
-                        @error('password')
-                            <div class="invalid-feedback">
-                                <strong>{{ $message }}</strong>
-                            </div>
-                        @enderror
-                    </div>
-                    
-                    <div class="remember-section">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="remember" id="remember" 
-                                   {{ old('remember') ? 'checked' : '' }}>
-                            <label class="form-check-label" for="remember">
-                                {{ __('Remember Me') }}
-                            </label>
+                    <form method="POST" action="{{ route('login') }}" id="loginForm">
+                        @csrf
+                        <div class="form-group">
+                            <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" 
+                                   name="username" value="{{ old('username') }}" required autocomplete="username" 
+                                   autofocus placeholder="Enter your username">
+                            <i class="fas fa-user input-icon"></i>
+                            @error('username')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         
-                        @if (Route::has('password.request'))
-                            <a class="forgot-link" href="{{ route('password.request') }}">
-                                {{ __('Forgot Password?') }}
+                        <div class="form-group">
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" 
+                                   name="password" required autocomplete="current-password" 
+                                   placeholder="Enter your password">
+                            <i class="fas fa-eye input-icon" id="togglePassword"></i>
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        
+                        <div class="remember-section">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                <label class="form-check-label" for="remember">
+                                    Remember Me
+                                </label>
+                            </div>
+                            
+                            @if (Route::has('password.request'))
+                                <a class="forgot-link" href="{{ route('password.request') }}">
+                                    Forgot Password?
+                                </a>
+                            @endif
+                        </div>
+                       
+                        <button type="submit" class="btn btn-primary">
+                            {{ __('Sign In') }}
+                        </button>
+                    </form>
+                    
+                    <div class="register-section">
+                        <p class="register-text">
+                            Belum punya akun? 
+                            <a href="{{ route('register') }}" class="register-link">
+                                Daftar sekarang
                             </a>
-                        @endif
+                        </p>
                     </div>
-                    
-                    
-                    <button type="submit" class="btn btn-primary">
-                        {{ __('Sign In') }}
-                    </button>
-                </form>
-                
-  
-    <div class="register-link-container">
-        <p class="register-text">
-            Belum punya akun? 
-            <a href="{{ route('register') }}" class="register-link">
-                Daftar sekarang
-            </a>
-        </p>
-    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script>
+// Add some interactive effects
+document.addEventListener('DOMContentLoaded', function() {
+    // Form validation visual feedback
+    const inputs = document.querySelectorAll('.form-control');
+    
+    inputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            this.style.transform = 'translateY(-2px)';
+        });
+        
+        input.addEventListener('blur', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+    
+    // Password visibility toggle
+    const togglePassword = document.querySelector('#togglePassword');
+    const passwordField = document.querySelector('#password');
+    
+    if (togglePassword && passwordField) {
+        togglePassword.addEventListener('click', function() {
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+            
+            // Toggle icon
+            if (type === 'text') {
+                this.classList.remove('fa-eye');
+                this.classList.add('fa-eye-slash');
+            } else {
+                this.classList.remove('fa-eye-slash');
+                this.classList.add('fa-eye');
+            }
+        });
+    }
+    
+    // Add subtle mouse movement effect to card
+    const card = document.querySelector('.login-card');
+    document.addEventListener('mousemove', function(e) {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        
+        const moveX = x / rect.width * 10;
+        const moveY = y / rect.height * 10;
+        
+        card.style.transform = `perspective(1000px) rotateY(${moveX * 0.1}deg) rotateX(${-moveY * 0.1}deg) translateZ(0)`;
+    });
+    
+    // Reset card position when mouse leaves
+    document.addEventListener('mouseleave', function() {
+        card.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) translateZ(0)';
+    });
+});
+</script>
+
 </body>
 </html>
