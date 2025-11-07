@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Mesin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class MesinController extends Controller
 {
@@ -19,9 +20,12 @@ class MesinController extends Controller
             ->when($search, function ($query, $search) {
                 return $query->where('nama_mesin', 'like', "%{$search}%")
                     ->orWhere('kode', 'like', "%{$search}%")
-                    ->orWhere('no_motor', 'like', "%{$search}%");
+                    ->orWhere('no_motor', 'like', "%{$search}%")
+                    ->orWhere('type_motor', 'like', "%{$search}%")
+                    ->orWhere('catatan', 'like', "%{$search}%");
             })
-            ->paginate(10);
+            // UBAH: Menampilkan 5 data per halaman
+            ->paginate(5); 
 
         return view('mesin.index', compact('mesins', 'search'));
     }
@@ -33,18 +37,30 @@ class MesinController extends Controller
     {
         // Gunakan nama kolom yang sesuai dengan database (huruf kecil)
         $validator = Validator::make($request->all(), [
-            'kode' => 'required|unique:tb_mesin',
-            'nama_mesin' => 'required',
+            'kode' => 'required|unique:tb_mesin', // Pastikan nama tabel benar
+            'nama_mesin' => 'required|string|max:255',
+            'no_motor' => 'nullable|string|max:255',
+            'type_motor' => 'nullable|string|max:255',
+            'kw_motor' => 'nullable|numeric',
+            'rpm_motor' => 'nullable|integer',
+            'bearing_depan' => 'nullable|string|max:255',
+            'bearing_belakang' => 'nullable|string|max:255',
+            'seal_depan' => 'nullable|string|max:255',
+            'seal_belakang' => 'nullable|string|max:255',
+            'catatan' => 'nullable|string',
         ]);
 
         if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
+            // Menggunakan withErrors untuk mengirim pesan validasi
+            return back()->withErrors($validator)->withInput(); 
         }
 
-        // Pastikan nama input di form sesuai dengan nama kolom di database
-        Mesin::create($request->all());
-
-        return back()->with('success', 'Data mesin berhasil ditambahkan!');
+        try {
+            Mesin::create($request->all());
+            return back()->with('success', 'Data mesin berhasil ditambahkan!');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Gagal menambahkan data mesin. Error: ' . $e->getMessage())->withInput();
+        }
     }
 
     /**
@@ -52,7 +68,8 @@ class MesinController extends Controller
      */
     public function update(Request $request, Mesin $mesin)
     {
-        // Perbaiki validasi: Gunakan nama kolom yang sesuai dengan database
+        // Perbaiki validasi: Kode tidak boleh diubah, atau jika diubah, harus tetap unik
+        // Namun, jika kode tidak dikirim, kita hanya validasi data lainnya
         $validatedData = $request->validate([
             'nama_mesin' => 'required|string|max:255',
             'no_motor' => 'nullable|string|max:255',
@@ -82,8 +99,13 @@ class MesinController extends Controller
      */
     public function destroy(Mesin $mesin)
     {
-        $mesin->delete();
-
-        return back()->with('success', 'Data mesin berhasil dihapus!');
+        // Route Model Binding (berkat getRouteKeyName di model) memastikan 
+        // $mesin adalah objek yang valid yang dicari berdasarkan kolom 'kode'.
+        try {
+            $mesin->delete();
+            return back()->with('success', 'Data mesin berhasil dihapus!');
+        } catch (\Exception $e) {
+             return back()->with('error', 'Gagal menghapus data mesin. Pastikan tidak ada data lain yang terkait.');
+        }
     }
 }

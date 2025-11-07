@@ -25,7 +25,9 @@ class BarangController extends Controller
             });
         }
 
-        $barangs = $query->get();
+        // --- Perubahan Utama di sini: Menggunakan paginate(10) ---
+        // Menampilkan 10 item per halaman
+        $barangs = $query->paginate(10); 
 
         return view('barang.index', compact('barangs'));
     }
@@ -117,21 +119,22 @@ class BarangController extends Controller
 
         return redirect()->route('barang.index')->with('success', 'Barang berhasil dihapus!');
     }
+
     public function fixData()
-{
-    $barangs = Barang::all();
+    {
+        $barangs = Barang::all();
 
-    foreach ($barangs as $barang) {
-        // Ambil data detail barang
-        $detailBarang = $barang->detailBarang;
+        foreach ($barangs as $barang) {
+            // Ambil data detail barang
+            $detailBarang = $barang->detailBarang;
 
-        // Jika detail barang ada, simpan ulang data
-        if ($detailBarang) {
-            $barang->save();
-            $detailBarang->save();
+            // Jika detail barang ada, simpan ulang data
+            if ($detailBarang) {
+                $barang->save();
+                $detailBarang->save();
+            }
         }
-    }
 
-    return "Semua data berhasil diperbaiki!";
-}
+        return "Semua data berhasil diperbaiki!";
+    }
 }

@@ -65,7 +65,7 @@
                     </div>
                     <div class="modal-footer d-flex justify-content-end">
                         <button type="button" class="btn elegant-btn elegant-btn-danger" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn elegant-btn elegant-btn-detail">Simpan Data</button>
+                        <button type="submit" class="btn elegant-btn elegant-btn-primary">Simpan Data</button>
                     </div>
                 </form>
             </div>
