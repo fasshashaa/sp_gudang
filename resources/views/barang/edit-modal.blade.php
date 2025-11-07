@@ -6,10 +6,10 @@
                 @method('PUT')
                 <div class="modal-header border-0 pb-0">
                     <h6 class="modal-title page-title fw-bold m-0 fs-5" id="createBarangModalLabel">
-                    <div class="title-icon">
-                        <i class="fas fa-edit"></i>
-                    </div>
-                    Edit Barang Baru
+                      <div class="title-icon">
+                        <i class="fas fa-edit"></i>          Edit Barang Baru
+                      </div>
+                   
                 </h6>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>

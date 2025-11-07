@@ -20,7 +20,12 @@ class BarangController extends Controller
                   ->orWhere('name_of_good', 'like', "%{$searchTerm}%")
                   ->orWhereHas('detailBarang', function ($q) use ($searchTerm) {
                       $q->where('specification', 'like', "%{$searchTerm}%")
-                        ->orWhere('box', 'like', "%{$searchTerm}%");
+                        ->orWhere('box', 'like', "%{$searchTerm}%")
+                        ->orWhere('using_2024', 'like', "%{$searchTerm}%")
+                        ->orWhere('opening', 'like', "%{$searchTerm}%")
+                        ->orWhere('used', 'like', "%{$searchTerm}%")
+                        ->orWhere('closing', 'like', "%{$searchTerm}%");
+                      
                   });
             });
         }

@@ -2,8 +2,10 @@
 <div class="modal fade" id="createMesinModal" tabindex="-1" aria-labelledby="createMesinModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="createMesinModalLabel">Tambah Data Mesin</h5>
+            <div class="modal-header border-0 pb-0">
+                <h5 class="modal-title elegant-modal-title" id="createMesinModalLabel">
+                     <i class="fas fa-plus me-2 text-primary-600"></i>Tambah Data Mesin
+                </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -32,11 +34,11 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="kw_motor" class="form-label">KW Motor</label>
-                            <input type="number" step="0.01" class="form-control" id="kw_motor" name="kw_motor">
+                            <input type="text" step="0.01" class="form-control" id="kw_motor" name="kw_motor">
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="rpm_motor" class="form-label">RPM Motor</label>
-                            <input type="number" class="form-control" id="rpm_motor" name="rpm_motor">
+                            <input type="text" class="form-control" id="rpm_motor" name="rpm_motor">
                         </div>
                     </div>
                     <div class="row">

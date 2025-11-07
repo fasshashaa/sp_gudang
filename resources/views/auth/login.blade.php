@@ -248,12 +248,14 @@
         font-weight: 500;
     }
     
+    /* --- PERBAIKAN JARAK DIMULAI DI SINI --- */
     .form-group {
         position: relative;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.5rem; /* Menjaga jarak default 1.5rem di bawah textbox */
     }
     
     .form-control {
+        /* ... properti form-control lainnya ... */
         width: 100%;
         height: 56px;
         border: 2px solid #e2e8f0;
@@ -265,6 +267,24 @@
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         color: #1e293b;
     }
+    
+    .remember-section {
+        /* Mengubah margin-bottom dari 2rem menjadi 1.5rem agar lebih rapat ke tombol */
+        margin-bottom: 1.5rem; 
+        
+        /* Hapus properti flex karena isinya dikosongkan/diubah */
+        /* display: flex; 
+        align-items: center; 
+        justify-content: space-between;
+        flex-wrap: wrap; 
+        gap: 1rem; */
+        
+        /* Tambahkan padding-top dan border-top yang hilang di register-section */
+        padding-top: 0;
+        border-top: none;
+    }
+    
+    /* --- PERBAIKAN JARAK SELESAI DI SINI --- */
     
     .form-control::placeholder {
         color: #94a3b8;
@@ -307,15 +327,6 @@
     .input-icon:hover {
         color: #4682b4;
         transform: translateY(-50%) scale(1.2);
-    }
-    
-    .remember-section {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 2rem;
-        flex-wrap: wrap;
-        gap: 1rem;
     }
     
     .form-check {
@@ -540,6 +551,7 @@
                     
                     <form method="POST" action="{{ route('login') }}" id="loginForm">
                         @csrf
+                        <!-- Textbox 1 (Username) -->
                         <div class="form-group">
                             <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" 
                                    name="username" value="{{ old('username') }}" required autocomplete="username" 
@@ -552,6 +564,7 @@
                             @enderror
                         </div>
                         
+                        <!-- Textbox 2 (Password) -->
                         <div class="form-group">
                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" 
                                    name="password" required autocomplete="current-password" 
@@ -566,22 +579,16 @@
                         
                         <div class="remember-section">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                <label class="form-check-label" for="remember">
-                                    Remember Me
-                                </label>
+                               
                             </div>
                             
-                            @if (Route::has('password.request'))
-                                <a class="forgot-link" href="{{ route('password.request') }}">
-                                    Forgot Password?
-                                </a>
-                            @endif
+                            <!-- Tombol Sign In berada di luar form-check/remember-section yang dikosongkan -->
+                            <button type="submit" class="btn btn-primary">
+                                {{ __('Sign In') }}
+                            </button>
+                            
                         </div>
-                       
-                        <button type="submit" class="btn btn-primary">
-                            {{ __('Sign In') }}
-                        </button>
+                        
                     </form>
                     
                     <div class="register-section">

@@ -1,8 +1,10 @@
 <div class="modal fade" id="editMesinModal" tabindex="-1" aria-labelledby="editMesinModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editMesinModalLabel"><i class="fas fa-edit me-2"></i>Edit Data Mesin</h5>
+                <div class="modal-header border-0 pb-0"> {{-- Hapus border dan padding bawah --}}
+                <h5 class="modal-title elegant-modal-title" id="detailMesinModalLabel">
+                    <i class="fas fa-edit me-2 text-primary-600"></i> Edit Data Mesin
+                </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form id="editMesinForm" method="POST" action="{{ route('mesin.update', ':kode') }}">
@@ -29,11 +31,11 @@
                         </div>
                         <div class="col-md-4">
                             <label for="edit-kw_motor" class="form-label">Kw Motor</label>
-                            <input type="number" step="0.01" class="form-control" id="edit-kw_motor" name="kw_motor">
+                            <input type="text" step="0.01" class="form-control" id="edit-kw_motor" name="kw_motor">
                         </div>
                         <div class="col-md-4">
                             <label for="edit-rpm_motor" class="form-label">RPM Motor</label>
-                            <input type="number" class="form-control" id="edit-rpm_motor" name="rpm_motor">
+                            <input type="text" class="form-control" id="edit-rpm_motor" name="rpm_motor">
                         </div>
                         <div class="col-md-4">
                             <label for="edit-bearing_depan" class="form-label">Bearing Depan</label>

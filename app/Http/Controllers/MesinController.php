@@ -22,7 +22,14 @@ class MesinController extends Controller
                     ->orWhere('kode', 'like', "%{$search}%")
                     ->orWhere('no_motor', 'like', "%{$search}%")
                     ->orWhere('type_motor', 'like', "%{$search}%")
-                    ->orWhere('catatan', 'like', "%{$search}%");
+                    ->orWhere('catatan', 'like', "%{$search}%")
+                    ->orWhere('bearing_depan', 'like', "%{$search}%")
+                    ->orWhere('bearing_belakang', 'like', "%{$search}%")
+                    ->orWhere('seal_depan', 'like', "%{$search}%")
+                    ->orWhere('seal_belakang', 'like', "%{$search}%")
+                    ->orWhere('kw_motor', 'like', "%{$search}%")
+                    ->orWhere('rpm_motor', 'like', "%{$search}%");
+                    
             })
             // UBAH: Menampilkan 5 data per halaman
             ->paginate(5); 

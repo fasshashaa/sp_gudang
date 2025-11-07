@@ -71,8 +71,9 @@
                                 <tr class="details-row">
                                     <td colspan="6">
                                         <div class="details-content">
-                                            <div class="detail-grid">
-                                                <div class="detail-item">
+                                            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                                            {{-- <div class="detail-grid"> --}}
+                                                <div class="detail-item me-4 mb-2 mb-md-0">
                                                     <span class="detail-label">
                                                         <i class="fas fa-calendar-check"></i>Using 2024
                                                     </span>

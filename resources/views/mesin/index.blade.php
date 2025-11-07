@@ -74,7 +74,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                            @empty
+                            @empty 
                                 <tr>
                                     <td colspan="6">
                                         <div class="empty-state">
