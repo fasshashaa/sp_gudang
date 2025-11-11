@@ -5,6 +5,33 @@
 @section('content')
 <div class="p-8 w-full">
 
+    {{-- TAMBAHKAN STYLE INI UNTUK MENGATUR LEBAR KOLOM CATATAN --}}
+    <style>
+        .catatan-column {
+            /* Tetapkan lebar maksimal (misalnya 250px) agar kolom lain tidak terdorong */
+            width: 250px; 
+            max-width: 250px;
+            /* Penting: Memastikan teks melipat ke baris baru */
+            white-space: normal; 
+            /* Tambahkan sedikit padding agar teks tidak terlalu mepet ke border */
+            padding: 8px 12px;
+            /* Atur perataan teks (misalnya rata kiri untuk keterbacaan) */
+            text-align: left; 
+        }
+        /* Memastikan header juga rata tengah (jika defaultnya rata tengah) */
+        .table thead th {
+             text-align: center; 
+             vertical-align: middle;
+        }
+        /* Menyesuaikan rata tengah pada header Catatan */
+        .catatan-header {
+             text-align: left !important; /* Biarkan header Catatan rata kiri */
+             vertical-align: middle;
+        }
+    </style>
+    {{-- AKHIR TAMBAHAN STYLE --}}
+
+
     <div class="stagger-animation">
         
         <div class="d-flex justify-content-between align-items-center mb-4 pt-3">
@@ -14,7 +41,6 @@
             
             <div class="d-flex gap-3 align-items-center">
                 
-              
                 <a href="{{ route('mesin.export.excel') }}" class="btn elegant-btn elegant-btn-primary btn-sm d-flex align-items-center">
                     <i class="fas fa-file-excel me-1"></i> Cetak ke Excel
                 </a>
@@ -29,7 +55,7 @@
             </div>
             
         </div>
-     
+      
         
         
         @if (session('success'))
@@ -53,7 +79,7 @@
                                 <th><i class="fas fa-cogs"></i>Nama Mesin</th>
                                 <th><i class="fas fa-bolt"></i>No. Motor</th>
                                 <th><i class="fas fa-tools"></i>Tipe Motor</th>
-                                <th><i class="fas fa-file"></i>Catatan</th>
+                                <th class="catatan-header catatan-column"><i class="fas fa-file"></i>Catatan</th>
                                 <th><i class="fas fa-hammer"></i>Aksi</th>
                             </tr>
                         </thead>
@@ -64,7 +90,7 @@
                                     <td>{{ $mesin->nama_mesin }}</td>
                                     <td>{{ $mesin->no_motor }}</td>
                                     <td>{{ $mesin->type_motor }}</td>
-                                    <td>{{ $mesin->catatan}}</td>
+                                    <td class="catatan-column">{{ $mesin->catatan}}</td> 
                                     <td>
                                         <div class="d-flex gap-2">
                                             <button class="btn elegant-btn elegant-btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#detailMesinModal" data-mesin='@json($mesin)'>
@@ -99,7 +125,7 @@
                         </tbody>
                     </table>
                     <br>
-                   
+                    
                     <div class="d-flex justify-content-center mt-4">
                         {{ $mesins->links('pagination::bootstrap-5') }}
                     </div>
@@ -118,7 +144,6 @@
 </div>
 
 <script>
-  
     document.addEventListener('DOMContentLoaded', function () {
         const detailModal = document.getElementById('detailMesinModal');
         
