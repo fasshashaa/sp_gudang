@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Gudang Sparepart - Login</title>
+<title>Gudang Sparepart - Login</title>
+<link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -27,7 +28,6 @@
         background-attachment: fixed;
     }
     
-    /* Enhanced animated background with soft blue */
     body::before {
         content: '';
         position: absolute;
@@ -47,8 +47,7 @@
         0%, 100% { opacity: 1; transform: scale(1); }
         50% { opacity: 0.8; transform: scale(1.05); }
     }
-    
-    /* Floating particles with soft blue */
+
     .particles {
         position: absolute;
         width: 100%;
@@ -94,11 +93,10 @@
     
     .login-wrapper {
         width: 100%;
-        max-width: 800px; /* Adjusted to make the card smaller */
+        max-width: 800px; 
         position: relative;
     }
-    
-    /* Main floating card */
+ 
     .login-card {
         background: rgba(255, 255, 255, 0.98);
         backdrop-filter: blur(30px);
@@ -106,7 +104,7 @@
         border-radius: 24px;
         overflow: hidden;
         box-shadow: 
-            0 20px 60px rgba(135, 206, 235, 0.08), /* Adjusted for less heavy look */
+            0 20px 60px rgba(135, 206, 235, 0.08),
             0 10px 20px rgba(135, 206, 235, 0.04),
             inset 0 1px 0 rgba(255, 255, 255, 0.8);
         animation: cardFloat 6s ease-in-out infinite, slideInUp 1s ease-out;
@@ -129,7 +127,6 @@
         }
     }
     
-    /* Glowing border effect with adjusted colors */
     .login-card::before {
         content: '';
         position: absolute;
@@ -154,14 +151,14 @@
     .card-content {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        min-height: 550px; /* Adjusted to make the card less tall */
+        min-height: 550px; 
     }
     
-    /* Left side - Welcome section with transparency */
+    
     .welcome-section {
         background: linear-gradient(135deg, #87ceeb 0%, #4682b4 100%);
         backdrop-filter: blur(20px);
-        padding: 2.5rem; /* Adjusted for tighter spacing */
+        padding: 2.5rem; 
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -194,16 +191,16 @@
         margin-bottom: 2rem;
     }
     
-    /* Adjusted size for the Nunggal logo image */
+    
     .logo-container img {
-        width: 80px; /* Adjusted to be smaller */
+        width: 80px;
         height: 80px;
         border-radius: 50%;
         margin-bottom: 1rem;
     }
     
     .welcome-title {
-        font-size: 32px; /* Adjusted to be smaller */
+        font-size: 32px; 
         font-weight: 800;
         margin-bottom: 1rem;
         letter-spacing: -0.02em;
@@ -221,9 +218,9 @@
         z-index: 2;
     }
     
-    /* Right side - Form section */
+    
     .form-section {
-        padding: 2.5rem; /* Adjusted for tighter spacing */
+        padding: 2.5rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -236,7 +233,7 @@
     }
     
     .form-title {
-        font-size: 28px; /* Adjusted to be smaller */
+        font-size: 28px; 
         font-weight: 700;
         color: #4682b4;
         margin-bottom: 0.5rem;
@@ -248,14 +245,12 @@
         font-weight: 500;
     }
     
-    /* --- PERBAIKAN JARAK DIMULAI DI SINI --- */
     .form-group {
         position: relative;
-        margin-bottom: 1.5rem; /* Menjaga jarak default 1.5rem di bawah textbox */
+        margin-bottom: 1.5rem; 
     }
     
     .form-control {
-        /* ... properti form-control lainnya ... */
         width: 100%;
         height: 56px;
         border: 2px solid #e2e8f0;
@@ -269,23 +264,11 @@
     }
     
     .remember-section {
-        /* Mengubah margin-bottom dari 2rem menjadi 1.5rem agar lebih rapat ke tombol */
         margin-bottom: 1.5rem; 
-        
-        /* Hapus properti flex karena isinya dikosongkan/diubah */
-        /* display: flex; 
-        align-items: center; 
-        justify-content: space-between;
-        flex-wrap: wrap; 
-        gap: 1rem; */
-        
-        /* Tambahkan padding-top dan border-top yang hilang di register-section */
         padding-top: 0;
         border-top: none;
     }
-    
-    /* --- PERBAIKAN JARAK SELESAI DI SINI --- */
-    
+
     .form-control::placeholder {
         color: #94a3b8;
         opacity: 0.8;
@@ -551,7 +534,6 @@
                     
                     <form method="POST" action="{{ route('login') }}" id="loginForm">
                         @csrf
-                        <!-- Textbox 1 (Username) -->
                         <div class="form-group">
                             <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" 
                                    name="username" value="{{ old('username') }}" required autocomplete="username" 
@@ -563,8 +545,7 @@
                                 </span>
                             @enderror
                         </div>
-                        
-                        <!-- Textbox 2 (Password) -->
+                   
                         <div class="form-group">
                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" 
                                    name="password" required autocomplete="current-password" 
@@ -581,8 +562,6 @@
                             <div class="form-check">
                                
                             </div>
-                            
-                            <!-- Tombol Sign In berada di luar form-check/remember-section yang dikosongkan -->
                             <button type="submit" class="btn btn-primary">
                                 {{ __('Sign In') }}
                             </button>
@@ -607,9 +586,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 <script>
-// Add some interactive effects
 document.addEventListener('DOMContentLoaded', function() {
-    // Form validation visual feedback
     const inputs = document.querySelectorAll('.form-control');
     
     inputs.forEach(input => {
@@ -621,8 +598,6 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.transform = 'translateY(0)';
         });
     });
-    
-    // Password visibility toggle
     const togglePassword = document.querySelector('#togglePassword');
     const passwordField = document.querySelector('#password');
     
@@ -630,8 +605,6 @@ document.addEventListener('DOMContentLoaded', function() {
         togglePassword.addEventListener('click', function() {
             const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
             passwordField.setAttribute('type', type);
-            
-            // Toggle icon
             if (type === 'text') {
                 this.classList.remove('fa-eye');
                 this.classList.add('fa-eye-slash');
@@ -641,8 +614,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
-    // Add subtle mouse movement effect to card
     const card = document.querySelector('.login-card');
     document.addEventListener('mousemove', function(e) {
         const rect = card.getBoundingClientRect();
@@ -654,8 +625,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         card.style.transform = `perspective(1000px) rotateY(${moveX * 0.1}deg) rotateX(${-moveY * 0.1}deg) translateZ(0)`;
     });
-    
-    // Reset card position when mouse leaves
     document.addEventListener('mouseleave', function() {
         card.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) translateZ(0)';
     });

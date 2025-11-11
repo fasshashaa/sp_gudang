@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gudang SP - @yield('title', 'Aplikasi')</title>
+  <title>Gudang Sparepart</title>
+<link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -52,8 +53,7 @@
             max-width: 1400px;
         }
 
-        /* --- STYLING NAVBAR BARU --- */
-        .main-navbar {
+       .main-navbar {
             background-color: white;
             box-shadow: var(--shadow-md);
             border-bottom: 1px solid var(--gray-200);
@@ -103,9 +103,7 @@
             margin-right: 8px;
             font-size: 1.5rem;
         }
-        /* --- AKHIR STYLING NAVBAR BARU --- */
 
-        /* --- STYLING DATA BARANG (Disesuaikan) --- */
         .elegant-card {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 24px;
@@ -133,8 +131,6 @@
             transform: translateY(-4px);
             box-shadow: var(--shadow-xl);
         }
-
-        /* Hapus .header-section di sini */
 
         .search-container {
             position: relative;
@@ -194,7 +190,6 @@
             transform: scale(1.02);
         }
 
-        /* ... Lanjutkan dengan gaya elegan-btn, data-grid, table, dll. ... */
         .elegant-btn {
             padding: 12px 24px;
             border: none;
@@ -479,8 +474,6 @@
             font-size: 1rem;
             color: var(--gray-500);
         }
-
-        /* Animations */
         @keyframes slideDown {
             from {
                 opacity: 0;
@@ -506,7 +499,6 @@
         .stagger-animation > *:nth-child(3) { animation-delay: 0.3s; }
         .stagger-animation > *:nth-child(4) { animation-delay: 0.4s; }
 
-        /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
@@ -526,7 +518,6 @@
             background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
         }
 
-        /* Floating button style */
         .floating-btn {
             position: fixed;
             bottom: 30px;
@@ -554,8 +545,7 @@
         }
 
         @media (max-width: 768px) {
-            /* Hapus header-section styling di sini */
-
+  
             .search-container {
                 min-width: auto;
             }

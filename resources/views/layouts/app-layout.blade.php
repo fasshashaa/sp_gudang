@@ -3,22 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gudang SP - @yield('title', 'Aplikasi')</title>
-
-    {{-- Tailwind CSS --}}
+   
+<title>Gudang Sparepart</title>
+<link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}">
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    {{-- Font Awesome --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    {{-- Bootstrap CSS (Dibutuhkan untuk Modal, Alert, dan Pagination) --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
-    {{-- Font Inter --}}
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
-        /* === BASE LAYOUT STYLES === */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #eef4ff;
@@ -35,15 +28,12 @@
             max-width: 1400px;
             margin: auto;
         }
-
-        /* Nav Item Styling & Navbar Fix */
         .nav-item {
             position: relative;
             padding: 0.5rem 1rem;
             transition: color 0.3s ease;
             text-decoration: none;
             color: #6b7280;
-            /* Penting untuk navbar responsive: */
             display: block; 
             text-align: left;
         }
@@ -66,9 +56,7 @@
             color: #4682b4 !important;
             font-weight: 600;
         }
-        
-        /* ... CSS lainnya (profile-img, action-card) ... */
-        .profile-img {
+            .profile-img {
             width: 50px;
             height: 50px;
             border-radius: 9999px;
@@ -92,10 +80,6 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
-
-        /* === CUSTOM STYLES DARI MANAJEMEN MESIN === */
-        
-        /* Elegant Card & Button */
         .elegant-card {
             background-color: #ffffff;
             border-radius: 1rem;
@@ -115,9 +99,6 @@
         .elegant-btn-warning:hover { background-color: #e0a800; border-color: #e0a800; color: #212529; }
         .elegant-btn-danger { background-color: #dc3545; border-color: #dc3545; color: white; }
         .elegant-btn-danger:hover { background-color: #c82333; border-color: #c82333; color: white; }
-
-
-        /* Floating Action Button */
         .floating-btn {
             position: fixed;
             bottom: 20px;
@@ -142,7 +123,6 @@
             transform: scale(1.05);
         }
 
-        /* Search Bar */
         .search-container {
             position: relative;
             display: flex;
@@ -177,8 +157,6 @@
         .search-btn:hover {
             color: #3b6d92;
         }
-
-        /* Responsive Table (Mobile Card Table) */
         @media (max-width: 767.98px) {
             .data-grid table thead {
                 display: none;
@@ -223,8 +201,6 @@
                 gap: 8px !important;
             }
         }
-
-        /* Animasi */
         .animate-slide-down {
             animation: slideDown 0.5s ease-out forwards;
         }
@@ -244,33 +220,23 @@
 <body class="bg-gray-100 flex flex-col items-center justify-center p-8">
 
     <div class="w-full h-full main-container">
-        
-        {{-- Navbar Bootstrap/Tailwind Hybrid --}}
+
         <nav class="navbar navbar-expand-lg navbar-light bg-white border-b border-gray-200 p-3">
             <div class="container-fluid">
-                
-                {{-- Logo/Brand --}}
                 <a class="navbar-brand d-flex align-items-center gap-2" href="#">
                     <i class="fas fa-boxes text-2xl text-blue-500"></i>
                     <h1 class="text-xl font-bold text-gray-800 mb-0">Gudang Sparepart</h1>
                 </a>
-                
-                {{-- Tombol Toggle Mobile --}}
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    
-                    {{-- Navigasi Utama --}}
-                    {{-- Dibiarkan tanpa d-flex/space-x agar Bootstrap menangani flex di lg --}}
-                    <div class="navbar-nav mx-auto py-2 py-lg-0">
+                                 <div class="navbar-nav mx-auto py-2 py-lg-0">
                         <a href="/" class="nav-item @if(request()->is('/')) active @endif">Dashboard</a>
                         <a href="/mesin" class="nav-item @if(request()->is('mesin*')) active @endif">Data Mesin</a>
                         <a href="/barang" class="nav-item @if(request()->is('barang*')) active @endif">Data Barang</a>
                     </div>
-
-                    {{-- Profil dan Logout --}}
                     <div class="navbar-nav d-flex align-items-center ms-auto pt-3 pt-lg-0">
                         <div class="text-lg-end text-center d-none d-sm-block me-3">
                             @auth
@@ -296,12 +262,8 @@
                 </div>
             </div>
         </nav>
-        
-        {{-- Konten Utama --}}
         @yield('content') 
     </div>
-
-    {{-- Bootstrap JS (WAJIB ADA) --}}
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/A60J/W+8Q0o4YwK2sXfF3vF5p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 

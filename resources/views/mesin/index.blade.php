@@ -4,23 +4,32 @@
 
 @section('content')
 <div class="p-8 w-full">
-    {{-- CATATAN PENTING: Untuk memastikan styling Anda yang baru (elegant-card, elegant-btn, dll.)
-    berfungsi, semua kode CSS kustom dari file ini HARUS dipindahkan ke dalam tag <style> 
-    di app-layout.blade.php, dan Bootstrap JS HARUS ditambahkan ke app-layout.blade.php. --}}
 
     <div class="stagger-animation">
+        
         <div class="d-flex justify-content-between align-items-center mb-4 pt-3">
             <h3 class="fw-bold text-gray-800 d-flex align-items-center gap-2">
                 <i class="fas fa-warehouse text-primary-600 fs-4"></i> Data Mesin
             </h3>
-            <form action="{{ route('mesin.index') }}" method="GET" class="search-container" style="min-width: 320px;">
-                <i class="fas fa-search search-icon"></i>
-                <input type="text" name="search" class="form-control search-input" placeholder="Search..." value="{{ request('search') }}">
-                <button type="submit" class="search-btn">
-                    <i class="fas fa-arrow-right"></i>
-                </button>
-            </form>
+            
+            <div class="d-flex gap-3 align-items-center">
+                
+              
+                <a href="{{ route('mesin.export.excel') }}" class="btn elegant-btn elegant-btn-primary btn-sm d-flex align-items-center">
+                    <i class="fas fa-file-excel me-1"></i> Cetak ke Excel
+                </a>
+
+                <form action="{{ route('mesin.index') }}" method="GET" class="search-container" style="min-width: 320px;">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" name="search" class="form-control search-input" placeholder="Search..." value="{{ request('search') }}">
+                    <button type="submit" class="search-btn">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </form>
+            </div>
+            
         </div>
+     
         
         
         @if (session('success'))
@@ -90,21 +99,18 @@
                         </tbody>
                     </table>
                     <br>
-                    {{-- Setelah </table> di bagian bawah data-grid --}}
-<!-- Diletakkan setelah penutup div elegant-card/tabel -->
-<div class="d-flex justify-content-center mt-4">
-    {{ $mesins->links('pagination::bootstrap-5') }}
-</div>
+                   
+                    <div class="d-flex justify-content-center mt-4">
+                        {{ $mesins->links('pagination::bootstrap-5') }}
+                    </div>
                 </div>
             </div>
         </div>
         
-        {{-- Tombol Floating Tambah Data --}}
+    
         <button type="button" class="floating-btn" data-bs-toggle="modal" data-bs-target="#createMesinModal">
             <i class="fas fa-plus"></i>
         </button>
-
-        {{-- Sertakan file modal di sini --}}
         @include('mesin.create-modal')
         @include('mesin.edit-modal')
         @include('mesin.detail-modal')
@@ -112,10 +118,10 @@
 </div>
 
 <script>
-    // Pastikan kode JS di sini agar tetap berfungsi setelah konten dimuat
+  
     document.addEventListener('DOMContentLoaded', function () {
         const detailModal = document.getElementById('detailMesinModal');
-        // ... (sisanya dari kode JS detailModal dan editModal)
+        
         if (detailModal) {
             detailModal.addEventListener('show.bs.modal', function (event) {
                 const button = event.relatedTarget;
@@ -142,10 +148,7 @@
                 const mesin = JSON.parse(button.getAttribute('data-mesin'));
                 
                 const form = editModal.querySelector('#editMesinForm');
-                
-                // Ganti string placeholder ':kode' dengan kode mesin yang sebenarnya
                 let route = form.getAttribute('action');
-                // Asumsi action route di form edit-modal adalah sesuatu seperti 'mesin/:kode'
                 route = route.replace(':kode', mesin.kode); 
                 form.setAttribute('action', route);
 

@@ -6,11 +6,13 @@ use App\Models\Mesin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+use App\Exports\MesinExport; 
+use Maatwebsite\Excel\Facades\Excel;
 
 class MesinController extends Controller
 {
     /**
-     * Menampilkan daftar mesin dengan fitur pencarian.
+     
      */
     public function index(Request $request)
     {
@@ -31,20 +33,19 @@ class MesinController extends Controller
                     ->orWhere('rpm_motor', 'like', "%{$search}%");
                     
             })
-            // UBAH: Menampilkan 5 data per halaman
-            ->paginate(5); 
+                 ->paginate(5); 
 
         return view('mesin.index', compact('mesins', 'search'));
     }
 
     /**
-     * Menyimpan data mesin baru.
+ 
      */
     public function store(Request $request)
     {
-        // Gunakan nama kolom yang sesuai dengan database (huruf kecil)
+       
         $validator = Validator::make($request->all(), [
-            'kode' => 'required|unique:tb_mesin', // Pastikan nama tabel benar
+            'kode' => 'required|unique:tb_mesin', 
             'nama_mesin' => 'required|string|max:255',
             'no_motor' => 'nullable|string|max:255',
             'type_motor' => 'nullable|string|max:255',
@@ -58,8 +59,7 @@ class MesinController extends Controller
         ]);
 
         if ($validator->fails()) {
-            // Menggunakan withErrors untuk mengirim pesan validasi
-            return back()->withErrors($validator)->withInput(); 
+                return back()->withErrors($validator)->withInput(); 
         }
 
         try {
@@ -71,13 +71,11 @@ class MesinController extends Controller
     }
 
     /**
-     * Memperbarui data mesin yang ada.
+
      */
     public function update(Request $request, Mesin $mesin)
     {
-        // Perbaiki validasi: Kode tidak boleh diubah, atau jika diubah, harus tetap unik
-        // Namun, jika kode tidak dikirim, kita hanya validasi data lainnya
-        $validatedData = $request->validate([
+             $validatedData = $request->validate([
             'nama_mesin' => 'required|string|max:255',
             'no_motor' => 'nullable|string|max:255',
             'type_motor' => 'nullable|string|max:255',
@@ -91,10 +89,9 @@ class MesinController extends Controller
         ]);
 
         try {
-            // Gunakan $validatedData untuk memperbarui data
-            $mesin->update($validatedData);
+                    $mesin->update($validatedData);
 
-            // Redirect ke halaman index setelah berhasil
+         
             return redirect()->route('mesin.index')->with('success', 'Data mesin berhasil diperbarui!');
         } catch (\Exception $e) {
             return redirect()->back()->withInput()->with('error', 'Gagal memperbarui data mesin. Error: ' . $e->getMessage());
@@ -102,17 +99,21 @@ class MesinController extends Controller
     }
 
     /**
-     * Menghapus data mesin.
+   
      */
     public function destroy(Mesin $mesin)
     {
-        // Route Model Binding (berkat getRouteKeyName di model) memastikan 
-        // $mesin adalah objek yang valid yang dicari berdasarkan kolom 'kode'.
-        try {
+               try {
             $mesin->delete();
             return back()->with('success', 'Data mesin berhasil dihapus!');
         } catch (\Exception $e) {
              return back()->with('error', 'Gagal menghapus data mesin. Pastikan tidak ada data lain yang terkait.');
         }
+     
+    }
+    public function exportExcel()
+    {
+        $fileName = 'Data_Mesin_' . now()->format('Ymd_His') . '.xlsx';
+                return Excel::download(new MesinExport, $fileName);
     }
 }
