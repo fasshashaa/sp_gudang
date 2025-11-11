@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request; // <<< TAMBAH: Import class Request
 
 class LoginController extends Controller
 {
@@ -12,11 +13,6 @@ class LoginController extends Controller
     |--------------------------------------------------------------------------
     | Login Controller
     |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
     */
 
     use AuthenticatesUsers;
@@ -26,7 +22,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/'; // UBAH INI KE '/' ATAU NAMA RUTENYA
+    protected $redirectTo = '/'; 
 
     /**
      * Create a new controller instance.
@@ -43,4 +39,17 @@ class LoginController extends Controller
         return 'username';
     }
 
+    /**
+     * TAMBAH: Attempt to log the user into the application without 'Remember Me'.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return bool
+     */
+    protected function attemptLogin(Request $request)
+    {
+        // Menyediakan credentials (username dan password) dan menyetel parameter
+        // 'remember' ke FALSE. Ini mencegah pembuatan cookie berumur panjang.
+        return $this->guard()->attempt(
+            $this->credentials($request), false );
+    }
 }
